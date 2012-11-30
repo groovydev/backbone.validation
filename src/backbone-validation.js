@@ -48,6 +48,7 @@ Backbone.Validation = (function(_){
   // becomes:
   //
   //     var o = {
+  //       'address': {street: 'Street', zip: 1234}	  
   //       'address.street': 'Street',
   //       'address.zip': 1234
   //     };
@@ -57,11 +58,9 @@ Backbone.Validation = (function(_){
 
     _.each(obj, function(val, key) {
       if(obj.hasOwnProperty(key)) {
+        into[prefix + key] = val;
         if (val && typeof val === 'object' && !(val instanceof Date || val instanceof RegExp)) {
           flatten(val, into, prefix + key + '.');
-        }
-        else {
-          into[prefix + key] = val;
         }
       }
     });
